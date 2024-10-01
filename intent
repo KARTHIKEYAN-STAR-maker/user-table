@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Table</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        #userInput {
+            width: 300px;
+            padding: 8px;
+            margin-top: 20px;
+        }
+
+        #info {
+            font-size: 0.9em;
+            color: grey;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h2>User Table</h2>
+    
+    <!-- Input field for user name -->
+    <input type="text" id="userInput" placeholder="Enter User Name" onkeydown="handleEnter(event)" />
+    <p id="info">Press Enter to add user</p>
+
+    <!-- User table -->
+    <table id="userTable">
+        <thead>
+            <tr>
+                <th>User Id</th>
+                <th>User Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>01</td>
+                <td>Ganesh Kumar</td>
+            </tr>
+            <tr>
+                <td>02</td>
+                <td>James Vasanth</td>
+            </tr>
+            <tr>
+                <td>03</td>
+                <td>Sam Daniel</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        // Function to handle Enter key press and add new user
+        let userId = 4; // Starting value for auto-increment User Id
+
+        function handleEnter(event) {
+            if (event.key === 'Enter') {
+                const userNameInput = document.getElementById('userInput').value.trim();
+                
+                if (userNameInput === "") {
+                    alert("User Name cannot be empty.");
+                    return;
+                }
+
+                // Get the table body element
+                const tableBody = document.getElementById('userTable').getElementsByTagName('tbody')[0];
+
+                // Create a new row
+                const newRow = document.createElement('tr');
+
+                // Create and populate the User Id cell
+                const userIdCell = document.createElement('td');
+                userIdCell.textContent = userId.toString().padStart(2, '0'); // Pad with zero
+
+                // Create and populate the User Name cell
+                const userNameCell = document.createElement('td');
+                userNameCell.textContent = userNameInput;
+
+                // Append cells to the row
+                newRow.appendChild(userIdCell);
+                newRow.appendChild(userNameCell);
+
+                // Append the new row to the table
+                tableBody.appendChild(newRow);
+
+                // Increment the userId for the next entry
+                userId++;
+
+                // Clear and reset the input box
+                document.getElementById('userInput').value = '';
+            }
+        }
+    </script>
+</body>
+</html>
